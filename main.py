@@ -79,36 +79,38 @@ def train_and_evaluate():
     )
     buffer = ReplayBuffer(state_dim=STATE_DIM, action_dim=ACTION_DIM)
 
-    for episode in range(NUM_EPISODES):
-        state = env.reset()
-        done = False
-        episode_reward = 0
+    try:
+        for episode in range(NUM_EPISODES):
+            state = env.reset()
+            done = False
+            episode_reward = 0
 
-        while not done:
-            action = sac_agent.select_action(state)
-            next_state, reward, done, collision = env.step(action)  # Add a collision flag in the step function
-            reward = reward_function(state, action, next_state, done, collision)
-            buffer.add(state, action, reward, next_state, done)
-            sac_agent.update(buffer)
+            while not done:
+                action = sac_agent.select_action(state)
+                next_state, reward, done = env.step(action)
+                buffer.add(state, action, reward, next_state, done)
+                sac_agent.update(buffer)
 
-            state = next_state
-            episode_reward += reward
+                state = next_state
+                episode_reward += reward
 
-        # Log the episode reward or any other statistics
-        print(f"Episode {episode}: Reward = {episode_reward}")
-        # for python2:
-        #print("Episode {}: Reward = {}".format(episode, episode_reward))
+            # Log the episode reward or any other statistics
+            print(f"Episode {episode}: Reward = {episode_reward}")
 
-        # Save the model periodically or based on a specific criterion
-        if episode % SAVE_INTERVAL == 0:
-            sac_agent.save(SAVE_PATH)
+            # Save the model periodically or based on a specific criterion
+            if episode % SAVE_INTERVAL == 0:
+                sac_agent.save(SAVE_PATH)
 
-        # Evaluate the agent's performance periodically or based on a specific criterion
-        if episode % EVALUATION_INTERVAL == 0:
-            evaluation_reward = evaluate_single_episode(sac_agent, env)
-            print(f"Episode {episode}: Evaluation Reward = {evaluation_reward}")
+            # Evaluate the agent's performance periodically or based on a specific criterion
+            if episode % EVALUATION_INTERVAL == 0:
+                evaluation_reward = evaluate_single_episode(sac_agent, env)
+                print(f"Episode {episode}: Evaluation Reward = {evaluation_reward}")
 
-    env.close()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    finally:
+        env.close()
 
 # Define the evaluation function for a single episode
 def evaluate_single_episode(agent, env):
