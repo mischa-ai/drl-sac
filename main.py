@@ -94,8 +94,9 @@ def train_and_evaluate():
             episode_reward += reward
 
         # Log the episode reward or any other statistics
-        #print(f"Episode {episode}: Reward = {episode_reward}")
-        print("Episode {}: Reward = {}".format(episode, episode_reward))
+        print(f"Episode {episode}: Reward = {episode_reward}")
+        # for python2:
+        #print("Episode {}: Reward = {}".format(episode, episode_reward))
 
         # Save the model periodically or based on a specific criterion
         if episode % SAVE_INTERVAL == 0:
