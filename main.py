@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import os
+import logging
 #import cv2
 
 # Import classes for SAC (Soft Actor Critic) Deep Reinforcement Learning
@@ -108,7 +109,7 @@ def train_and_evaluate():
                 print(f"Episode {episode}: Evaluation Reward = {evaluation_reward}")
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logging.exception("An exception has been thrown!")
 
     finally:
         env.close()
