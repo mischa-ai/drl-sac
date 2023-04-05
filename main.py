@@ -87,7 +87,7 @@ def train_and_evaluate():
 
             while not done:
                 action = sac_agent.select_action(state)
-                next_state, reward, done = env.step(action)
+                next_state, reward, done, _ = env.step(action)
                 next_state = preprocess_state(next_state)
                 buffer.add(state, action, reward, next_state, done)
                 sac_agent.update(buffer)
