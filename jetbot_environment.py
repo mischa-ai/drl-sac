@@ -18,10 +18,11 @@ class JetbotEnvironment:
         for pin in self.button_pins:
             GPIO.setup(pin, GPIO.IN)
 
-    def read_button_states(button_pins):
+    def read_button_states(self, button_pins):
         # Read the button states into a NumPy array
         button_states = np.array([GPIO.input(pin) for pin in button_pins], dtype=np.float32)
         return button_states
+
 
     def reset(self):
         self.robot.stop()  # Stop the robot motors
@@ -42,7 +43,7 @@ class JetbotEnvironment:
         time.sleep(0.1)  # You can adjust this duration based on your requirements
 
         # Read the next state from the sensors and the camera
-        sensor_state = self.read_button_states()
+        sensor_state = self.read_button_states(self.button_pins)
         img_state = self.camera.value
         next_state = (img_state, sensor_state)
 
