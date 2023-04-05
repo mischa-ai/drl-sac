@@ -35,8 +35,8 @@ class JetbotEnvironment:
 
     def step(self, action):
         # Apply the action to the robot motors
-        left_motor_speed = action[0]
-        right_motor_speed = action[1]
+        left_motor_speed = float(action[0])  # Convert to float
+        right_motor_speed = float(action[1])  # Convert to float
         self.robot.set_motors(left_motor_speed, right_motor_speed)
 
         # Sleep for a small duration to allow the robot to execute the action
