@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import os
-import cv2
+#import cv2
 
 # Import classes for SAC (Soft Actor Critic) Deep Reinforcement Learning
 from jetbot_environment import JetbotEnvironment
@@ -45,12 +45,15 @@ def preprocess_state(state):
     img_state, sensor_state = state
 
     # Preprocess the camera image (e.g., resize, grayscale, normalize)
-    processed_img = cv2.resize(img_state, (84, 84))
-    processed_img = cv2.cvtColor(processed_img, cv2.COLOR_BGR2GRAY)
-    processed_img = processed_img.astype(np.float32) / 255.0
+    #processed_img = cv2.resize(img_state, (84, 84))
+    #processed_img = cv2.cvtColor(processed_img, cv2.COLOR_BGR2GRAY)
+    #processed_img = processed_img.astype(np.float32) / 255.0
 
     # Combine the preprocessed camera image with the sensor_state
-    processed_state = np.concatenate([processed_img.flatten(), sensor_state])
+    #processed_state = np.concatenate([processed_img.flatten(), sensor_state])
+
+    # Combine the preprocessed camera image with the sensor_state without CV2
+    processed_state = np.concatenate([img_state.flatten(), sensor_state])
 
     return processed_state
 
