@@ -77,7 +77,7 @@ def train_and_evaluate():
         evaluation_interval=EVALUATION_INTERVAL,
         save_path=SAVE_PATH,
     )
-    buffer = ReplayBuffer()
+    buffer = ReplayBuffer(state_dim=STATE_DIM, action_dim=ACTION_DIM)
 
     for episode in range(NUM_EPISODES):
         state = env.reset()
