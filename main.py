@@ -6,10 +6,6 @@ import torch.optim as optim
 import os
 import cv2
 
-# Import libraries for Robot Control
-from jetbot import Robot
-import Jetson.GPIO as GPIO
-
 # Import classes for SAC (Soft Actor Critic) Deep Reinforcement Learning
 from jetbot_environment import JetbotEnvironment
 from actor import Actor

@@ -2,7 +2,6 @@ import numpy as np
 from jetbot import Robot, Camera
 import time
 import Jetson.GPIO as GPIO
-import cv2
 
 class JetbotEnvironment:
     def __init__(self):
