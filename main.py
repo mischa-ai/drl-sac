@@ -64,6 +64,7 @@ def train_and_evaluate():
     sac_agent = SAC(
         state_dim=STATE_DIM,
         action_dim=ACTION_DIM,
+        max_action=1,
         learning_rate=LEARNING_RATE,
         gamma=GAMMA,
         tau=TAU,

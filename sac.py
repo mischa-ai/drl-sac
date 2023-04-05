@@ -13,6 +13,7 @@ class SAC:
         self,
         state_dim,
         action_dim,
+        max_action,
         learning_rate,
         gamma,
         tau,
@@ -27,6 +28,7 @@ class SAC:
     ):
         self.state_dim = state_dim
         self.action_dim = action_dim
+        self.max_action = max_action
         self.learning_rate = learning_rate
         self.gamma = gamma
         self.tau = tau
