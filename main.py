@@ -81,12 +81,14 @@ def train_and_evaluate():
     try:
         for episode in range(NUM_EPISODES):
             state = env.reset()
+            state = preprocess_state(state)
             done = False
             episode_reward = 0
 
             while not done:
                 action = sac_agent.select_action(state)
                 next_state, reward, done = env.step(action)
+                next_state = preprocess_state(next_state)
                 buffer.add(state, action, reward, next_state, done)
                 sac_agent.update(buffer)
 
